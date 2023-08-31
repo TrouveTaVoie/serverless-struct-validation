@@ -1,0 +1,21 @@
+name: "validate structure"
+description: "Validate the repository structure"
+
+
+runs:
+  using: "composite"
+  steps:
+  - name: Validate Repository Structure
+    shell: bash
+    id: validate-structure
+    run: |
+      # Add your validation logic here
+      # For example, check for necessary directories and files
+      if [ -d "src" ] && [ -d "src/services" ]; then
+        echo "Repository structure is valid"
+        echo "::set-output name=structure_valid::true"
+      else
+        echo "Repository structure is not valid"
+        echo "::set-output name=structure_valid::false"
+        exit 1
+      fi
