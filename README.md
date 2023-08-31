@@ -13,3 +13,8 @@ You should have a principal folder src that will have a subfolder named services
 │   │      ├── serverless.yml        # `Hello` lambda Serverless 
 
 ```
+## Example usage
+
+```yaml
+- name: Validate structure
+  uses: TrouveTaVoie/serverless-struct-validation@main
