@@ -1,21 +1,20 @@
-name: "validate structure"
-description: "Validate the repository structure"
-
+name: "Validate severless structure"
+description: "Validate the structure of the serverless repository."
 
 runs:
   using: "composite"
   steps:
-  - name: Validate Repository Structure
-    shell: bash
-    id: validate-structure
-    run: |
-      # Add your validation logic here
-      # For example, check for necessary directories and files
-      if [ -d "src" ] && [ -d "src/services" ]; then
-        echo "Repository structure is valid"
-        echo "::set-output name=structure_valid::true"
-      else
-        echo "Repository structure is not valid"
-        echo "::set-output name=structure_valid::false"
-        exit 1
-      fi
+    - name: Validate Repository Structure
+      shell: bash
+      id: serverless-struct-validation
+      run: |
+        # Add your validation logic here
+        # For example, check for necessary directories and files
+        if [ -d "src" ] && [ -d "src/services" ]; then
+          echo "Repository structure is valid"
+          echo "::set-output name=structure_valid::true"
+        else
+          echo "Repository structure is not valid"
+          echo "::set-output name=structure_valid::false"
+          exit 1
+        fi
