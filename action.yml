@@ -1,5 +1,5 @@
-name: "validate structure"
-description: "Validate the repository structure"
+name: "Validate severless structure"
+description: "Validate the structure of the serverless repository."
 
 
 runs:
@@ -7,7 +7,7 @@ runs:
   steps:
   - name: Validate Repository Structure
     shell: bash
-    id: validate-structure
+    id: serverless-struct-validation
     run: |
       # Add your validation logic here
       # For example, check for necessary directories and files
