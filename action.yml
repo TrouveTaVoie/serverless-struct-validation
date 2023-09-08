@@ -1,20 +1,40 @@
 name: "Validate severless structure"
 description: "Validate the structure of the serverless repository."
 
+
 runs:
   using: "composite"
   steps:
-    - name: Validate Repository Structure
-      shell: bash
-      id: serverless-struct-validation
-      run: |
-        # Add your validation logic here
-        # For example, check for necessary directories and files
-        if [ -d "src" ] && [ -d "src/services" ]; then
-          echo "Repository structure is valid"
-          echo "::set-output name=structure_valid::true"
-        else
-          echo "Repository structure is not valid"
-          echo "::set-output name=structure_valid::false"
-          exit 1
-        fi
+  - name: Validate Repository Structure
+    shell: bash
+    id: serverless-struct-validation
+    run: |
+      # Add your validation logic here
+      # For example, check for necessary directories and files
+      if [ -d "src" ] && [ -d "src/services" ]; then
+        echo "Repository structure is valid"
+        dir="src/services"
+
+        # Set the suffix to check
+        suffix="-service"
+
+        # Loop through all directories in the specified directory
+        for d in "$dir"/*; do
+        # Check if it is a directory
+          if [ -d "$d" ]; then
+             # Get the directory name without the path
+             dirname=${d##*/}
+             # Check if the directory name ends with the specified suffix
+             if [[ $dirname != *"$suffix" ]]; then
+              # If it does not, print an error message and exit with a non-zero status code
+              echo "Error: Directory $dirname does not have the suffix $suffix"
+              exit 1
+            fi
+         fi
+       done
+      else
+        echo "Repository structure is not valid"
+        exit 1
+      fi
+
+
